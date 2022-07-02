@@ -9,6 +9,7 @@ library(googleErrorReportingR)
 
 
 api_key <- Sys.getenv("API_KEY")
+project_id <- Sys.getenv("PROJECT_ID")
 
 
 
