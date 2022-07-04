@@ -30,7 +30,7 @@ function(n = 100) {
   message <- format_error_message()
   message$serviceContext$version <- "v0.0.1"
   
-  if (n <= 0) {
+  if (n < 0) {
     
     # This is to try to catch the error before the stop (stop demo)
     message$serviceContext$service <- "Argument should be an integer greather than 0"
