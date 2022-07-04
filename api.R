@@ -8,8 +8,8 @@ library(tidyverse)
 library(googleErrorReportingR)
 
 
-api_key <- Sys.getenv("API_KEY")
-
+project_id <- Sys.getenv("PROJECT_ID")
+api_key <- Sys.getenv("ERROR_REPORTING_API_KEY")
 
 
 #* @apiTitle Plumber Example API
@@ -28,17 +28,15 @@ function(msg = "") {
 function(n = 100) {
   
   message <- format_error_message()
+  message$serviceContext$version <- "v0.0.1"
   
   if (n <= 0) {
     
     # This is to try to catch the error before the stop (stop demo)
     message$serviceContext$service <- "Argument should be an integer greather than 0"
-    message$serviceContext$version <- "v0.0.1"
-    project_id <- "infraestructura-pruebas"
     
-    googleErrorReportingR::report_error(project_id,
-                                        api_key,
-                                        message)
+    
+    googleErrorReportingR::report_error(message)
     
     stop("Argument should be an integer greather than 0")
         
